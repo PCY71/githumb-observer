@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import TopTrade from './component/top_trade';
 import styled from 'styled-components';
 
 
@@ -20,9 +21,10 @@ function App() {
         <Logo src='../Githumb.png' alt='로고' />
       </Header>
       <Contents>
-        변동률
-        {market}
-        리스트
+        <TopTrade />
+        <div>
+          리스트
+        </div>
       </Contents>
     </Body>
   );
@@ -33,17 +35,24 @@ export default App;
 //styled-components
 const Body = styled.div`
 font-family: 'Spoqa Han Sans Neo',Roboto,"Noto Sans KR",Arial,"Malgun Gothic",sans-serif;
+display:flex;
+flex-direction:column;
+align-items: center;
 `;
 const Header = styled.div`
 position: relative;
 height: 100px;
+width: 100%;
 border-bottom: 1px solid rgba(0,0,0,0.1);
 background-color: #333333;
 color: white;
 text-align: center;
 `;
-const Contents = styled.div`
-`;
 const Logo = styled.img`
 height: 100%;
+`;
+const Contents = styled.div`
+width: 1024px;
+display: flex;
+flex-direction: column;
 `;
