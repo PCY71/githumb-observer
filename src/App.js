@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TopTrade from './component/top_trade';
+import List from './component/list';
 import styled from 'styled-components';
 
 
@@ -18,13 +19,11 @@ function App() {
   return (
     <Body>
       <Header>
-        <Logo src='../Githumb.png' alt='로고' />
+        <Logo src='../Githumb.png' alt='logo' />
       </Header>
       <Contents>
         <TopTrade />
-        <div>
-          리스트
-        </div>
+        <List />
       </Contents>
     </Body>
   );

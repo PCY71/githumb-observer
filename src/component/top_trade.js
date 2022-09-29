@@ -35,6 +35,9 @@ function TopTrade() {
     };
     return (
         <Top5ListWrap>
+            <Title>
+                마켓 변동률 TOP5
+            </Title>
             <Top5ListBox>
                 <Top5List>
                     <TopTradeItem item={test1} />
@@ -53,6 +56,8 @@ export default TopTrade;
 const Top5ListWrap = styled.div`
 `
 const Top5ListBox = styled.div`
+`
+const Title = styled.h2`
 `
 const Top5List = styled.ul`
 list-style:none;

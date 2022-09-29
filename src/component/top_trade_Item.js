@@ -7,7 +7,7 @@ function TopTradeItem({ item }) {
                 <div class="top5-list-item">
                     <dl class="jump">
                         <dt class="name">
-                            {item.name}
+                            {item.name}({item.ticker})
                         </dt>
                         <dd class="price">
                             {item.price}
@@ -23,7 +23,7 @@ function TopTradeItem({ item }) {
                             </span>
                         </dd>
                         <dd class="chart">
-                            차트
+                            미니차트
                         </dd>
                     </dl>
                 </div>
