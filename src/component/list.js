@@ -69,7 +69,7 @@ function List() {
                     </tr>
                 </thead>
             </TableHead>
-            <div class="chart_wrap"></div>
+            <div className="chart_wrap"></div>
             <ListItem item={test1} />
             <ListItem item={test2} />
             <ListItem item={test3} />

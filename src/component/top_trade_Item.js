@@ -3,17 +3,17 @@ import React from "react";
 function TopTradeItem({ item }) {
     return (
         <li id="boa">
-            <div class="top5-list-item-box">
-                <div class="top5-list-item">
-                    <dl class="jump">
-                        <dt class="name">
+            <div className="top5-list-item-box">
+                <div className="top5-list-item">
+                    <dl className="jump">
+                        <dt className="name">
                             {item.name}({item.ticker})
                         </dt>
-                        <dd class="price">
+                        <dd className="price">
                             {item.price}
                         </dd>
-                        <dd class="rate">
-                            <span class="btn">
+                        <dd className="rate">
+                            <span className="btn">
                                 <i>
                                     아이콘
                                 </i>
@@ -22,7 +22,7 @@ function TopTradeItem({ item }) {
                                     : `- ${item.rate}%`}
                             </span>
                         </dd>
-                        <dd class="chart">
+                        <dd className="chart">
                             미니차트
                         </dd>
                     </dl>
