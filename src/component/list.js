@@ -1,8 +1,19 @@
 import React from "react";
 import styled from 'styled-components';
 import ListItem from './list_item';
+import TokenInfo from '../tokenInfo';
 
 function List({ tokens }) {
+
+    const list_rendering = () => {
+        const result = [];
+        for (const token in TokenInfo) {
+            result.push(<ListItem item={tokens[token]} ticker={token} />)
+        }
+
+        return result;
+    }
+
     return (
         <>
             <TableHead>
@@ -22,7 +33,7 @@ function List({ tokens }) {
                             <span>실시간 시세</span>
                         </th>
                         <th>
-                            <span>변동률</span>
+                            <span>변동률(30분)</span>
                         </th>
                         <th>
                             <span>전일종가</span>
@@ -34,10 +45,7 @@ function List({ tokens }) {
                 </thead>
             </TableHead>
             <div className="chart_wrap"></div>
-            <ListItem item={tokens.BTC} ticker={"BTC"} />
-            <ListItem item={tokens.ETH} ticker={"ETH"} />
-            <ListItem item={tokens.ETC} ticker={"ETC"} />
-            <ListItem item={tokens.XRP} ticker={"XRP"} />
+            {list_rendering()}
         </>
     )
 }
@@ -45,6 +53,8 @@ function List({ tokens }) {
 export default List;
 
 const TableHead = styled.table`
+position:sticky;
+top: 100px;
 th{
     background-color: #f9f9f9
 }

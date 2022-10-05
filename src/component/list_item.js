@@ -5,7 +5,6 @@ import TokenInfo from '../tokenInfo';
 function ListItem({ item, ticker }) {
     return (
         <Table>
-            {console.log(item)}
             <colgroup>
                 <col width={200} />
                 <col width={200} />
@@ -30,7 +29,7 @@ function ListItem({ item, ticker }) {
                     </td>
                     <td className="rate">
                         <div>
-                            +{item?.change_price ? item.change_price : 0} 원(+{item?.change_rate ? item.change_rate : 0}%)
+                            {item?.chg_Amt ? item.chg_Amt : 0} 원({item?.chg_Rate ? item.chg_Rate : 0}%)
                         </div>
                     </td>
                     <td>

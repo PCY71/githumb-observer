@@ -57,7 +57,6 @@ function App() {
       };
       ws.current.onmessage = (msg) => {
         const data = JSON.parse(msg.data);
-        //console.log(data);
         setWsData(data);
       }
     }
@@ -73,6 +72,18 @@ function App() {
   }, [connected]);
 
   //새로 데이터가 들어오면 token 정보 갱신
+  useEffect(() => {
+    const data = wsData.content;
+    console.log(data);
+    if (data) {
+      const symbol = data.symbol.split('_')[0];
+      let tempObj = tokens;
+      tempObj[symbol].closing_price = data.closePrice;
+      tempObj[symbol].chg_Amt = data.chgAmt;
+      tempObj[symbol].chg_Rate = data.chgRate;
+      setTokens(tempObj);
+    }
+  }, [wsData]);
 
   return (
     <Body>
@@ -97,7 +108,10 @@ flex-direction:column;
 align-items: center;
 `;
 const Header = styled.div`
-position: relative;
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
 height: 100px;
 width: 100%;
 border-bottom: 1px solid rgba(0,0,0,0.1);
@@ -110,6 +124,7 @@ height: 100%;
 -webkit-user-drag: none;
 `;
 const Contents = styled.div`
+padding-top: 100px;
 width: 1024px;
 display: flex;
 flex-direction: column;
