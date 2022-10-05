@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
+import TokenInfo from './tokenInfo';
 import TopTrade from './component/top_trade';
 import List from './component/list';
 import styled from 'styled-components';
@@ -6,25 +8,39 @@ import styled from 'styled-components';
 
 function App() {
   /* State 목록
-  추가 예정
-    market : KRW - 원화마켓, BTC - BTC마켓 (initial: 원화마켓)
-    tokens : 토큰들 정보 (initial: BTC, ETH, KLAY, BNB, SOL)
-   */
+  connected : 웹소켓 연결
+  ticker별 웹소켓에서 받아오는 data : 토큰들 실시간 정보
+  tokens : 토큰들 정적인 정보 
+  status	결과 상태 코드 각 필드 참조(https://apidocs.bithumb.com/reference/%ED%98%84%EC%9E%AC%EA%B0%80-%EC%A0%95%EB%B3%B4-%EC%A1%B0%ED%9A%8C-all)
+  */
   const [connected, setConnected] = useState(false);
+  const [wsData, setWsData] = useState([]);
   const [tokens, setTokens] = useState([]);
 
   const webSocketUrl = 'wss://pubwss.bithumb.com/pub/ws';
+  const apiGetUrl = 'https://api.bithumb.com/public/ticker/ALL_KRW';
   let ws = useRef(null);
+
+  const symbols = Object.keys(TokenInfo).map((el) => `${el}_KRW`);
 
   //테스트용
   const test = {
     "type": "ticker",
-    "symbols": ["BTC_KRW", "ETH_KRW"],
+    "symbols": symbols,
     "tickTypes": ["30M"]
   };
 
-  //소켓 객체 생성
+  //소켓 객체 및 토큰 정보 초기화
   useEffect(() => {
+    const getInfo = async () => {
+      try {
+        const res = await axios.get(apiGetUrl);
+        setTokens(res.data.data);
+      } catch (e) {
+        console.log('something went wrong :( ', e);
+      }
+    };
+
     if (!ws.current) {
       ws.current = new WebSocket(webSocketUrl);
       ws.current.onopen = () => {
@@ -41,15 +57,13 @@ function App() {
       };
       ws.current.onmessage = (msg) => {
         const data = JSON.parse(msg.data);
-        console.log(data);
-        setTokens(data);
+        //console.log(data);
+        setWsData(data);
       }
     }
 
-    return () => {
-      //ws.current.close();
-    };
-  }, [])
+    getInfo();
+  }, []);
 
   //소켓이 연결되면 send
   useEffect(() => {
@@ -58,16 +72,16 @@ function App() {
     }
   }, [connected]);
 
+  //새로 데이터가 들어오면 token 정보 갱신
+
   return (
     <Body>
       <Header>
         <Logo src='../Githumb.png' alt='logo' />
-        {//console.log(tokens)
-        }
       </Header>
       <Contents>
         <TopTrade />
-        <List />
+        <List tokens={tokens} />
       </Contents>
     </Body>
   );

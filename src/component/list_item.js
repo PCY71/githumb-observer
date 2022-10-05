@@ -1,10 +1,11 @@
 import React from "react";
 import styled from 'styled-components';
+import TokenInfo from '../tokenInfo';
 
-
-function ListItem({ item }) {
+function ListItem({ item, ticker }) {
     return (
         <Table>
+            {console.log(item)}
             <colgroup>
                 <col width={200} />
                 <col width={200} />
@@ -17,32 +18,32 @@ function ListItem({ item }) {
                     <td>
                         <div className="sort_coin_box">
                             <p>
-                                <strong>{item.name}</strong>
-                                <span className="sort_coin">{item.ticker}/KRW</span>
+                                <strong>{TokenInfo[ticker].name}</strong>
+                                <span className="sort_coin">{ticker}/KRW</span>
                             </p>
                         </div>
                     </td>
                     <td>
                         <div className="sort_real_box">
-                            <strong>{item.cur_price}원</strong>
+                            <strong>{item?.closing_price}원</strong>
                         </div>
                     </td>
                     <td className="rate">
                         <div>
-                            +{item.change_price} 원(+{item.change_rate}%)
+                            +{item?.change_price ? item.change_price : 0} 원(+{item?.change_rate ? item.change_rate : 0}%)
                         </div>
                     </td>
                     <td>
-                        <span>≈ {item.trade_amount} 원</span>
+                        <span className="assettotal">
+                            {item?.prev_closing_price}
+                        </span>
                     </td>
                     <td>
-                        <span className="assettotal">
-                            {item.total_amount}
-                        </span>
+                        <span>≈ {item?.acc_trade_value_24H} 원</span>
                     </td>
                 </tr>
             </tbody>
-        </Table>
+        </Table >
     )
 }
 
