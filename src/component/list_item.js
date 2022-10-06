@@ -11,11 +11,19 @@ function ListItem({ item, ticker }) {
         color = '#4386f9'
     }
 
-    const num_trans = (num = '0') => {
+    const num_trans = (num = '0', deleteSign = false) => {
         if (num.includes('.')) {
             const [int, dec] = num.split('.');
             num = int + '.' + dec.slice(0, 2);
         }
+
+        if (num.includes('-')) {
+            num = '-' + num.slice(1);
+        } else if (Number(num) > 0) {
+            num = '+' + num;
+        }
+
+        num = deleteSign ? num.slice(1) : num;
 
         const num_trans_reg = /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g
         return num.replace(num_trans_reg, ',')
@@ -42,12 +50,12 @@ function ListItem({ item, ticker }) {
                     </td>
                     <td>
                         <RealBox>
-                            <strong>{num_trans(item?.closing_price)}원</strong>
+                            <strong>{num_trans(item?.closing_price, true)}원</strong>
                         </RealBox>
                     </td>
                     <td>
                         <Rate color={color}>
-                            {item?.chg_Amt > 0 ? '+' : ''} {item?.chg_Amt ? num_trans(item.chg_Amt) : 0} 원( {item?.chg_Rate > 0 ? '+' : ''} {item?.chg_Rate ? item.chg_Rate : 0}%)
+                            {item?.chg_Amt ? num_trans(item.chg_Amt) : 0}원 ({item?.chg_Rate ? num_trans(item.chg_Rate) : 0}%)
                             {item?.chg_Amt
                                 ? item?.chg_Amt > 0
                                     ? <i class="fa fa-caret-up"></i>
@@ -58,12 +66,12 @@ function ListItem({ item, ticker }) {
                     </td>
                     <td>
                         <PrevPrice>
-                            {num_trans(item?.prev_closing_price)} 원
+                            {num_trans(item?.prev_closing_price, true)}원
                         </PrevPrice>
                     </td>
                     <td>
                         <CoinAsset>
-                            ≈ {num_trans(item?.acc_trade_value_24H)} 원
+                            ≈ {num_trans(item?.acc_trade_value_24H, true)}원
                         </CoinAsset>
                     </td>
                 </tr>
@@ -106,5 +114,6 @@ const PrevPrice = styled.span`
 float:right;
 `
 const CoinAsset = styled.span`
+font-size: small;
 float:right;
 `
