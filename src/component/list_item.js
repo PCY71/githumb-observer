@@ -11,24 +11,6 @@ function ListItem({ item, ticker }) {
         color = '#4386f9'
     }
 
-    const num_trans = (num = '0', deleteSign = false) => {
-        if (num.includes('.')) {
-            const [int, dec] = num.split('.');
-            num = int + '.' + dec.slice(0, 2);
-        }
-
-        if (num.includes('-')) {
-            num = '-' + num.slice(1);
-        } else if (Number(num) > 0) {
-            num = '+' + num;
-        }
-
-        num = deleteSign ? num.slice(1) : num;
-
-        const num_trans_reg = /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g
-        return num.replace(num_trans_reg, ',')
-    }
-
     return (
         <Table>
             <colgroup>
@@ -58,8 +40,8 @@ function ListItem({ item, ticker }) {
                             {item?.chg_Amt ? num_trans(item.chg_Amt) : 0}원 ({item?.chg_Rate ? num_trans(item.chg_Rate) : 0}%)
                             {item?.chg_Amt
                                 ? item?.chg_Amt > 0
-                                    ? <i class="fa fa-caret-up"></i>
-                                    : <i class="fa fa-caret-down"></i>
+                                    ? <i className="fa fa-caret-up"></i>
+                                    : <i className="fa fa-caret-down"></i>
                                 : <></>}
 
                         </Rate>
@@ -79,8 +61,24 @@ function ListItem({ item, ticker }) {
         </Table >
     )
 }
+const num_trans = (num = '0', deleteSign = false) => {
+    const num_trans_reg = /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g
 
-export default ListItem;
+    if (num.includes('.')) {
+        const [int, dec] = num.split('.');
+        num = int + '.' + dec.slice(0, 2);
+    }
+
+    if (num.includes('-')) {
+        num = '-' + num.slice(1);
+    } else if (Number(num) > 0) {
+        num = '+' + num;
+    }
+    num = deleteSign ? num.slice(1) : num;
+    return num.replace(num_trans_reg, ',')
+}
+
+export { ListItem, num_trans };
 
 const Table = styled.table`
 width: 100%;

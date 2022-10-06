@@ -1,6 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
-import ListItem from './list_item';
+import { ListItem } from './list_item';
 import TokenInfo from '../tokenInfo';
 
 function List({ tokens }) {

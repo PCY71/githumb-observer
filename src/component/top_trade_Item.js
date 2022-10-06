@@ -1,25 +1,28 @@
 import React from "react";
+import { num_trans } from './list_item';
+import TokenInfo from '../tokenInfo';
+import styled from 'styled-components';
 
-function TopTradeItem({ item }) {
+function TopTradeItem({ item, ticker }) {
     return (
-        <li id="boa">
+        <CoinBox>
             <div className="top5-list-item-box">
                 <div className="top5-list-item">
                     <dl className="jump">
                         <dt className="name">
-                            {item.name}({item.ticker})
+                            {TokenInfo[ticker].name}
                         </dt>
                         <dd className="price">
-                            {item.price}
+                            {num_trans(item?.closing_price, true)}
                         </dd>
                         <dd className="rate">
                             <span className="btn">
-                                <i>
-                                    아이콘
-                                </i>
-                                {item.rate > 0
-                                    ? `+ ${item.rate}%`
-                                    : `- ${item.rate}%`}
+                                {item?.chg_Amt
+                                    ? item?.chg_Amt > 0
+                                        ? <i className="fa fa-caret-up"></i>
+                                        : <i className="fa fa-caret-down"></i>
+                                    : <></>}
+                                {item?.chg_Amt ? num_trans(item.chg_Amt) : 0}원 ({item?.chg_Rate ? num_trans(item.chg_Rate) : 0}%)
                             </span>
                         </dd>
                         <dd className="chart">
@@ -28,8 +31,15 @@ function TopTradeItem({ item }) {
                     </dl>
                 </div>
             </div>
-        </li>
+        </CoinBox>
     )
 }
 
 export default TopTradeItem;
+
+const CoinBox = styled.li`
+width: 200px;
+i{
+    margin-right: 5px;
+}
+`

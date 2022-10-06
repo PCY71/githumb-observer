@@ -2,37 +2,7 @@ import React from "react";
 import TopTradeItem from './top_trade_Item';
 import styled from 'styled-components';
 
-function TopTrade() {
-    const test1 = {
-        ticker: "BOA",
-        name: "보아",
-        price: 65.02,
-        rate: 16.57
-    };
-    const test2 = {
-        ticker: "VALOR",
-        name: "밸러토큰",
-        price: 340.3,
-        rate: 4.10
-    };
-    const test3 = {
-        ticker: "REQ",
-        name: "리퀘스트",
-        price: 153.9,
-        rate: 7.25
-    };
-    const test4 = {
-        ticker: "ACH",
-        name: "알케미페이",
-        price: 17.69,
-        rate: 5.42
-    };
-    const test5 = {
-        ticker: "MKR",
-        name: "메이커",
-        price: 1067000,
-        rate: 5.12
-    };
+function TopTrade({ tokens }) {
     return (
         <Top5ListWrap>
             <Title>
@@ -40,11 +10,11 @@ function TopTrade() {
             </Title>
             <Top5ListBox>
                 <Top5List>
-                    <TopTradeItem item={test1} />
-                    <TopTradeItem item={test2} />
-                    <TopTradeItem item={test3} />
-                    <TopTradeItem item={test4} />
-                    <TopTradeItem item={test5} />
+                    <TopTradeItem item={tokens.BTC} ticker={"BTC"} />
+                    <TopTradeItem item={tokens.ETH} ticker={"ETH"} />
+                    <TopTradeItem item={tokens.BNB} ticker={"BNB"} />
+                    <TopTradeItem item={tokens.XRP} ticker={"XRP"} />
+                    <TopTradeItem item={tokens.ADA} ticker={"ADA"} />
                 </Top5List>
             </Top5ListBox>
         </Top5ListWrap>

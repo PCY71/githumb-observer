@@ -119,6 +119,10 @@ const TokenInfo = {
         id: 30,
         name: "체인링크"
     },
+    "BNB": {
+        id: 31,
+        name: "바이낸스코인"
+    }
 }
 
 export default TokenInfo;
