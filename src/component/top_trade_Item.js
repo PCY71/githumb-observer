@@ -6,26 +6,36 @@ import { Bar } from 'react-chartjs-2';
 import { Chart, CategoryScale, registerables } from 'chart.js'
 Chart.register(CategoryScale, ...registerables);
 
-//임시 테스트용
-const testData = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purpole', 'Orange', 'Red', 'Blue', 'Yellow', 'Green', 'Purpole', 'Orange', 'Red', 'Blue', 'Yellow', 'Green', 'Purpole', 'Orange', 'Red', 'Blue', 'Yellow', 'Green', 'Purpole', 'Orange', 'Red', 'Blue', 'Yellow', 'Green', 'Purpole', 'Orange', 'Red', 'Blue', 'Yellow', 'Green', 'Purpole', 'Orange', 'Red', 'Blue', 'Yellow', 'Green', 'Purpole', 'Orange', 'Red', 'Blue', 'Yellow', 'Green', 'Purpole', 'Orange', 'Red', 'Blue', 'Yellow', 'Green', 'Purpole', 'Orange', 'Red', 'Blue', 'Yellow', 'Green', 'Purpole', 'Orange', 'Red', 'Blue', 'Yellow', 'Green', 'Purpole', 'Orange'],
-    datasets: [
-        {
-            data: [12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3],
-        },
-    ],
-};
-
 function TopTradeItem({ item, ticker, chartData }) {
-    chartData = chartData[ticker]?.data.filter((el, idx) => idx > 2980);
+    chartData = chartData[ticker]?.data.filter((el, idx) => idx > 1560);
+    const date = chartData ? chartData.map((el) => el[0]) : []
+    const price = chartData ? chartData.map((el) => el[2]) : []
     const data = {
-        labels: chartData ? chartData.map((el) => el[0]) : [],
+        labels: date,
         datasets: [
             {
-                data: chartData ? chartData.map((el) => el[2]) : [],
+                data: price,
             }
         ]
     }
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: false,
+            },
+        },
+        scales: {
+            x: {
+                display: false,
+            },
+            y: {
+                display: false,
+                min: Math.min(...price),
+                max: Math.max(...price),
+            }
+        },
+    };
 
     let color = '#000000'
 
@@ -58,7 +68,7 @@ function TopTradeItem({ item, ticker, chartData }) {
                         </Rate>
                     </dl>
                     <ChartWrap>
-                        <Bar data={data} />
+                        <Bar data={data} options={options} />
                     </ChartWrap>
                 </div>
             </div>
