@@ -25,21 +25,28 @@ function TopTradeItem({ item, ticker, chartData }) {
                 data: chartData ? chartData.map((el) => el[2]) : [],
             }
         ]
+    }
 
+    let color = '#000000'
+
+    if (item?.chg_Amt > 0) {
+        color = '#f75467'
+    } else if (item?.chg_Amt < 0) {
+        color = '#4386f9'
     }
 
     return (
-        <CoinBox>
+        <CoinBox color={color}>
             <div className="top5-list-item-box">
                 <div className="top5-list-item">
                     <dl className="jump">
                         <dt className="name">
                             {TokenInfo[ticker].name}
                         </dt>
-                        <dd className="price">
-                            ₩ {num_trans(item?.closing_price, true)}
-                        </dd>
-                        <dd className="rate">
+                        <Price>
+                            {num_trans(item?.closing_price, true)}
+                        </Price>
+                        <Rate>
                             <span className="btn" >
                                 {item?.chg_Amt && Number(item?.chg_Amt) !== 0
                                     ? item?.chg_Amt > 0
@@ -48,7 +55,7 @@ function TopTradeItem({ item, ticker, chartData }) {
                                     : <></>}
                                 {item?.chg_Rate ? num_trans(item.chg_Rate) : 0}%
                             </span>
-                        </dd>
+                        </Rate>
                     </dl>
                     <ChartWrap>
                         <Bar data={data} />
@@ -66,6 +73,16 @@ width: 200px;
 i{
     margin-right: 5px;
 }
+dd{
+    color : ${(props) => props.color};
+    margin-inline-start: 0;
+}
+`
+const Price = styled.dd`
+font-size: x-large;
+font-weight: bold;
+`
+const Rate = styled.dd`
 `
 const ChartWrap = styled.div`
 width: 95%;

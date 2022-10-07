@@ -6,7 +6,7 @@ function TopTrade({ tokens, chartData }) {
     return (
         <Top5ListWrap>
             <Title>
-                마켓 변동률 TOP5
+                마켓 거래량 TOP5
             </Title>
             <Top5ListBox>
                 <Top5List>
