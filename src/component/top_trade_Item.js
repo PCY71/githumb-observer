@@ -7,11 +7,15 @@ import { Chart, CategoryScale, registerables } from 'chart.js'
 Chart.register(CategoryScale, ...registerables);
 
 function TopTradeItem({ item, ticker, chartData }) {
-    chartData = chartData[ticker]?.data.filter((el, idx) => idx > 1560);
-    const date = chartData ? chartData.map((el) => el[0]) : []
-    const price = chartData ? chartData.map((el) => el[2]) : []
+    chartData = chartData[ticker]?.data.filter((el, idx) => idx > 2857);
+    const time = [];
+    const price = [];
+    chartData?.forEach((el) => {
+        time.push(el[0]);
+        price.push(el[2]);
+    });
     const data = {
-        labels: date,
+        labels: time,
         datasets: [
             {
                 data: price,
@@ -33,6 +37,11 @@ function TopTradeItem({ item, ticker, chartData }) {
                 display: false,
                 min: Math.min(...price),
                 max: Math.max(...price),
+            }
+        },
+        elements: {
+            point: {
+                radius: 0
             }
         },
     };
