@@ -2,7 +2,7 @@ import React from "react";
 import TopTradeItem from './top_trade_Item';
 import styled from 'styled-components';
 
-function TopTrade({ tokens }) {
+function TopTrade({ tokens, chartData }) {
     return (
         <Top5ListWrap>
             <Title>
@@ -10,11 +10,11 @@ function TopTrade({ tokens }) {
             </Title>
             <Top5ListBox>
                 <Top5List>
-                    <TopTradeItem item={tokens.BTC} ticker={"BTC"} />
-                    <TopTradeItem item={tokens.ETH} ticker={"ETH"} />
-                    <TopTradeItem item={tokens.BNB} ticker={"BNB"} />
-                    <TopTradeItem item={tokens.XRP} ticker={"XRP"} />
-                    <TopTradeItem item={tokens.ADA} ticker={"ADA"} />
+                    <TopTradeItem item={tokens.BTC} ticker={"BTC"} chartData={chartData} />
+                    <TopTradeItem item={tokens.ETH} ticker={"ETH"} chartData={chartData} />
+                    <TopTradeItem item={tokens.BNB} ticker={"BNB"} chartData={chartData} />
+                    <TopTradeItem item={tokens.XRP} ticker={"XRP"} chartData={chartData} />
+                    <TopTradeItem item={tokens.ADA} ticker={"ADA"} chartData={chartData} />
                 </Top5List>
             </Top5ListBox>
         </Top5ListWrap>

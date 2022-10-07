@@ -38,7 +38,7 @@ function ListItem({ item, ticker }) {
                     <td>
                         <Rate color={color}>
                             {item?.chg_Amt ? num_trans(item.chg_Amt) : 0}원 ({item?.chg_Rate ? num_trans(item.chg_Rate) : 0}%)
-                            {item?.chg_Amt
+                            {item?.chg_Amt && Number(item?.chg_Amt) !== 0
                                 ? item?.chg_Amt > 0
                                     ? <i className="fa fa-caret-up"></i>
                                     : <i className="fa fa-caret-down"></i>
@@ -96,6 +96,7 @@ p{
     display: flex;
     flex-direction: column;
     span{
+        color: grey;
         font-size: small;
     }
 }

@@ -99,11 +99,10 @@ function App() {
   return (
     <Body>
       <Header>
-        {console.log(chartData)}
         <Logo src='../Githumb.png' alt='logo' />
       </Header>
       <Contents>
-        <TopTrade tokens={tokens} />
+        <TopTrade tokens={tokens} chartData={chartData} />
         <List tokens={tokens} />
       </Contents>
     </Body>
