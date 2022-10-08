@@ -12,7 +12,7 @@ function TopTradeItem({ item, ticker, chartData }) {
     const price = [];
     chartData?.forEach((el) => {
         const el_time = new Date(el[0]);
-        const month = num_to_string(el_time.getMonth());
+        const month = num_to_string(el_time.getMonth() + 1);
         const date = num_to_string(el_time.getDate());
         const hour = num_to_string(el_time.getHours());
         const min = num_to_string(el_time.getMinutes());
