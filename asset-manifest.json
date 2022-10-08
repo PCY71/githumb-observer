@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/githumb-observer/static/css/main.e6c13ad2.css",
+    "main.js": "/githumb-observer/static/js/main.d568c69c.js",
+    "index.html": "/githumb-observer/index.html",
+    "main.e6c13ad2.css.map": "/githumb-observer/static/css/main.e6c13ad2.css.map",
+    "main.d568c69c.js.map": "/githumb-observer/static/js/main.d568c69c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.d568c69c.js"
+  ]
+}
