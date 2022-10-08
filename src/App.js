@@ -99,7 +99,7 @@ function App() {
   return (
     <Body>
       <Header>
-        <Logo src='../Githumb.png' alt='logo' />
+        <Logo src='https://i.ibb.co/khdTC5K/Githumb.png' alt='logo' />
       </Header>
       <Contents>
         <TopTrade tokens={tokens} chartData={chartData} />
