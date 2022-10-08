@@ -11,7 +11,12 @@ function TopTradeItem({ item, ticker, chartData }) {
     const time = [];
     const price = [];
     chartData?.forEach((el) => {
-        time.push(el[0]);
+        const el_time = new Date(el[0]);
+        const month = num_to_string(el_time.getMonth());
+        const date = num_to_string(el_time.getDate());
+        const hour = num_to_string(el_time.getHours());
+        const min = num_to_string(el_time.getMinutes());
+        time.push(`${month}-${date} ${hour}:${min}`);
         price.push(el[2]);
     });
     const data = {
@@ -84,6 +89,7 @@ function TopTradeItem({ item, ticker, chartData }) {
         </CoinBox>
     )
 }
+const num_to_string = (num) => num < 10 ? '0' + num.toString() : num.toString()
 
 export default TopTradeItem;
 

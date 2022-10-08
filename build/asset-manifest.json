@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/githumb/static/css/main.e6c13ad2.css",
+    "main.js": "/githumb/static/js/main.56ab539c.js",
+    "index.html": "/githumb/index.html",
+    "main.e6c13ad2.css.map": "/githumb/static/css/main.e6c13ad2.css.map",
+    "main.56ab539c.js.map": "/githumb/static/js/main.56ab539c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.56ab539c.js"
+  ]
+}
